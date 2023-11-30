@@ -1,0 +1,26 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: service-to-be-scaled-ingress
+  namespace: predictive-scaler
+  annotations:
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: minikube.local
+      http:
+        paths:
+          - path: /api/v1/index
+            pathType: Prefix
+            backend:
+              service:
+                name: service-to-be-scaled
+                port:
+                  number: 8080
+          - path: /api/v1/metrics
+            pathType: Prefix
+            backend:
+              service:
+                name: service-to-be-scaled
+                port:
+                  number: 8080                

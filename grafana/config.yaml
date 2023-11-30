@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: grafana-config
+  namespace: predictive-scaler
+data:
+  grafana.ini: |
+    [server]
+    root_url = http://grafana.local/
+    [database]
+    [analytics]
+    check_for_updates = false
+    [security]
+    admin_user = admin
+    admin_password = predictive-scaler

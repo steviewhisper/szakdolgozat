@@ -1,0 +1,12 @@
+rules:
+  external:
+  - metricsQuery: sum(irate(<<.Series>>{<<.LabelMatchers>>}[1m]))
+    name:
+      as: ${1}_per_second
+      matches: ^(.*)_requests
+    resources:
+      namespaced: false
+      overrides:
+        controller_namespace:
+          resource: namespace
+    seriesQuery: nginx_ingress_controller_requests

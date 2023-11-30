@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: minikube-ip
+  namespace: predictive-scaler
+data:
+  MINIKUBE_IP: 127.0.0.1

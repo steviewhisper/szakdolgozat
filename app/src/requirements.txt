@@ -1,0 +1,4 @@
+Werkzeug==2.2.2
+Flask==2.2.2
+Flask_Cors==3.0.10
+prometheus-client==0.18.0

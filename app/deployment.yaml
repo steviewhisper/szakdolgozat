@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: service-to-be-scaled
+  namespace: predictive-scaler
+  labels:
+    app: service-to-be-scaled
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: service-to-be-scaled
+  template:
+    metadata:
+      labels:
+        app: service-to-be-scaled
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io.scheme: "http"
+        prometheus.io/path: "/api/v1/metrics"
+        prometheus.io/port: "8080"
+    spec:
+      containers:
+      - name: service-to-be-scaled
+        image: krisz99/service-to-be-scaled:latest
+        imagePullPolicy: "Always"
+        ports:
+        - containerPort: 8080
+        env:
+        - name: MINIKUBE_IP
+          valueFrom:
+            configMapKeyRef:
+              name: minikube-ip
+              key: MINIKUBE_IP
+      imagePullSecrets:
+        - name: image-pull-secret
